@@ -28,6 +28,24 @@ if (count($conditions) > 0) {
     $sql .= " WHERE " . implode(" AND ", $conditions);
 }
 
+$sql = "SELECT * FROM tu_arte WHERE 1=1";
+
+if (!empty($_GET['emocion'])) {
+    $sql .= " AND emocion = '" . $_GET['emocion'] . "'";
+}
+if (!empty($_GET['estilo'])) {
+    $sql .= " AND estilo = '" . $_GET['estilo'] . "'";
+}
+
+
+if (!empty($_GET['q'])) {
+    $sql .= " AND (titulo LIKE '%" . $_GET['q'] . "%' OR descripcion LIKE '%" . $_GET['q'] . "%')";
+}
+
+explicm
+$sql .= " ORDER BY RAND()";
+
+
 $stmt = $conn->prepare($sql);
 
 // Asociar parámetros si hay filtros
